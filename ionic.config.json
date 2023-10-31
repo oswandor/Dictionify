@@ -1,0 +1,7 @@
+{
+  "name": "Dictionify",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
