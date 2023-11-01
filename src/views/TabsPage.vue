@@ -42,9 +42,9 @@ export default {
 }
 
 .custom-icon {
-  background: #7578f8 !important;
-  --color: #cfe1ff !important;
-  --color-selected: #190482c0 !important;
+  background: #623DB3 !important;
+  --color: #ffffff !important;
+  --color-selected: #352161!important;
   --color-focused: rgb(255, 255, 255) !important;
 }
 </style>
