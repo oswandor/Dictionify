@@ -1,9 +1,10 @@
 <template>
-  <ion-page >
+  <ion-page>
     <ion-content :fullscreen="true" class="ion-content">
 
       <ion-card class="ion-no-margin ion-card">
-        <img alt="Silhouette of mountains" src="https://i.pinimg.com/736x/bb/3d/02/bb3d027efc8586606821a1c60c10a986.jpg" />
+        <img alt="Silhouette of mountains"
+          src="https://i.pinimg.com/736x/bb/3d/02/bb3d027efc8586606821a1c60c10a986.jpg" />
         <ion-card-header class="ion-card-header-centered">
           <ion-card-title>Welcome App Dictionify</ion-card-title>
           <ion-card-subtitle>This app is Dicctionary Platfomr</ion-card-subtitle>
@@ -14,35 +15,48 @@
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  <ion-button fill="solid"  @click="login" shape="round" class="ion-margin ion-margin-solid">Iniciar
-                    sesión</ion-button>
+                  <ion-button fill="solid" @click="login" shape="round" class="ion-margin ion-margin-solid"><ion-icon
+                      :icon="logIn" class="ion-margin-end"></ion-icon>login</ion-button>
 
                 </ion-col>
                 <ion-col>
-                  <ion-button fill="outline" @click="login" shape="round"
-                    class="ion-margin ion-margin-no-solid">Registrar</ion-button>
+                  <ion-button fill="outline" @click="login" shape="round" class="ion-margin ion-margin-no-solid"><ion-icon
+                      :icon="logOut" class="ion-margin-end"></ion-icon>sig-up</ion-button>
                 </ion-col>
 
               </ion-row>
             </ion-grid>
 
-
-
-
-
           </div>
         </ion-card-content>
       </ion-card>
-
-
-
-
     </ion-content>
   </ion-page>
 </template>
-<script setup>
-import { ref } from 'vue';
+<script>
+
+import { ref, defineComponent } from 'vue';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { home, logIn, logOut } from 'ionicons/icons';
+
+
+
+export default {
+  name: "HomePage",
+  components: {
+    IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, ref, defineComponent
+  },
+  data() {
+    return {
+      logOut,
+      logIn,
+      home,
+
+    };
+  },
+
+}
+
 
 </script>
 
@@ -75,13 +89,13 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel
 
 .ion-margin-solid {
 
-   --background: rgb(98, 62, 168,1);
+  --background: rgb(98, 62, 168, 1);
 }
 
 .ion-margin-no-solid {
- 
-  --border-color:rgb(98, 62, 168,1) ;
-   --color: rgb(98, 62, 168 ,1);
+
+  --border-color: rgb(98, 62, 168, 1);
+  --color: rgb(98, 62, 168, 1);
 }
 
 .ion-card-header-centered {
@@ -123,7 +137,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel
 
 .ion-card-content-centered {
 
-   margin-top: 20%; 
+  margin-top: 20%;
 
 }
 </style>
