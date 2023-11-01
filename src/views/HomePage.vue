@@ -15,12 +15,13 @@
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  <ion-button fill="solid" @click="login" shape="round" class="ion-margin ion-margin-solid"><ion-icon
-                      :icon="logIn" class="ion-margin-end"></ion-icon>login</ion-button>
+                  <ion-button fill="solid" shape="round" class="ion-margin ion-margin-solid"
+                    @click="navigateToLoginComponente">
+                    <ion-icon :icon="logIn" class="ion-margin-end"></ion-icon>login</ion-button>
 
                 </ion-col>
                 <ion-col>
-                  <ion-button fill="outline" @click="login" shape="round" class="ion-margin ion-margin-no-solid"><ion-icon
+                  <ion-button fill="outline" @click="navigateToSigupComponente" shape="round" class="ion-margin ion-margin-no-solid"><ion-icon
                       :icon="logOut" class="ion-margin-end"></ion-icon>sig-up</ion-button>
                 </ion-col>
 
@@ -42,10 +43,12 @@ import { home, logIn, logOut } from 'ionicons/icons';
 
 
 export default {
+
   name: "HomePage",
   components: {
     IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, ref, defineComponent
   },
+
   data() {
     return {
       logOut,
@@ -54,6 +57,17 @@ export default {
 
     };
   },
+
+  methods: {
+    navigateToLoginComponente() {
+      this.$router.push('/LoginPage');
+    },
+    navigateToSigupComponente() {
+      this.$router.push('/SigupPage');
+    },
+  }
+
+
 
 }
 
