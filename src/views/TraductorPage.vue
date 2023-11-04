@@ -1,6 +1,12 @@
 <template>
     <ion-page>
-        <div>
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>Header Toolbar</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+
             <ion-item>
 
                 <select v-model="fromLanguage" interface="action-sheet" cancelText="Cancelar">
@@ -14,8 +20,8 @@
 
             <div class="ion-input">
 
-                <ion-input aria-label="Tertiary input" color="tertiary"  placeholder="Type something here"  v-model="textToTranslate"
-                    @input="translateText"></ion-input>
+                <ion-input aria-label="Tertiary input" color="tertiary" placeholder="Type something here"
+                    v-model="textToTranslate" @input="translateText"></ion-input>
 
             </div>
 
@@ -31,15 +37,14 @@
                 <p>Idioma seleccionado: {{ toLanguages }}</p>
 
                 <div class="ion-input">
-                <ion-input  aria-placeholder="Traducción"
-                    v-if="translationResult && translationResult.length > 0"
-                    :value="translationResult[0].translations[0].text || 'translator'" :auto-grow="true"></ion-input>
-            
+                    <ion-input aria-placeholder="Traducción" v-if="translationResult && translationResult.length > 0"
+                        :value="translationResult[0].translations[0].text || 'translator'" :auto-grow="true"></ion-input>
+
                 </div>
 
-            
-                </div>
-        </div>
+
+            </div>
+        </ion-content>
     </ion-page>
 </template>
   
@@ -129,12 +134,14 @@ select {
 .ion-input {
     width: 100%;
     height: 188px;
-    border-left: 1px solid transparent; /* Bordes transparentes en los lados izquierdo y derecho */
+    border-left: 1px solid transparent;
+    /* Bordes transparentes en los lados izquierdo y derecho */
     border-right: 1px solid transparent;
-    border-top: 1px solid #c9c9c9; /* Borde superior */
-    border-bottom: 1px solid #c9c9c9; /* Borde inferior */
+    border-top: 1px solid #c9c9c9;
+    /* Borde superior */
+    border-bottom: 1px solid #c9c9c9;
+    /* Borde inferior */
     padding-left: 16px;
 }
-
 </style>
   
