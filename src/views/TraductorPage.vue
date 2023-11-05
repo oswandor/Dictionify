@@ -2,11 +2,12 @@
     <ion-page>
         <ion-header>
             <ion-toolbar>
-                <ion-title>Header Toolbar</ion-title>
+                <ion-icon  class="ion-margin-start" :icon="language" size="large" color="primary" slot="start"></ion-icon> <ion-title>Translator</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content>
 
+            <br><br>
             <ion-item>
 
                 <select v-model="fromLanguage" interface="action-sheet" cancelText="Cancelar">
@@ -16,7 +17,7 @@
                     <option value="es">Español</option>
                 </select>
             </ion-item>
-            <p>Idioma seleccionado: {{ fromLanguage }}</p>
+
 
             <div class="ion-input">
 
@@ -34,7 +35,7 @@
                         <option value="es">Español</option>
                     </select>
                 </ion-item>
-                <p>Idioma seleccionado: {{ toLanguages }}</p>
+
 
                 <div class="ion-input">
                     <ion-input aria-placeholder="Traducción" v-if="translationResult && translationResult.length > 0"
@@ -49,15 +50,18 @@
 </template>
   
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import {  IonIcon,IonButtons,IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { home, logIn, logOut , language } from 'ionicons/icons'; 
+
+
 
 export default {
     name: "TraductorPage",
     components: {
-        IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
+        IonIcon,  IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
     },
     data() {
         return {
@@ -68,6 +72,8 @@ export default {
             toLanguages: '',
             textToTranslate: "",
             translationResult: null,
+            language 
+ 
         };
     },
     methods: {
