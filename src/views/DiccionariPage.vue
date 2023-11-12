@@ -24,8 +24,8 @@
             <ion-button @click="search" class="ion-margin-start ion-buttondic">Search</ion-button>
 
             <ion-list>
-                <ion-item v-if="results != null">
-                    <ion-label>
+                <ion-item v-if="results != null" class="ion-text-wrap">
+                    <ion-label >
                         
                         <h1>Palabra</h1>
                         <br>
@@ -55,7 +55,7 @@
 
                         </ion-label>
 
-                        <ion-label v-if="results.antonimos" >
+                        <ion-label class="ion-text-wrap" v-if="results.antonimos" >
                             <h1>Antonimos</h1>
                             <br>
                             {{  getResultText(results) }}
@@ -102,7 +102,7 @@ export default {
 
             console.log(this.searchTerm)
 
-            axios.get(`http://localhost:5000/${this.searchType}/${this.searchTerm}`).then((response) => {
+            axios.get(`http://4.157.91.179:5000/${this.searchType}/${this.searchTerm}`).then((response) => {
                 this.results = response.data;
                 console.log(this.results);
             });

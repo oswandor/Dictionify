@@ -1,8 +1,24 @@
 <template>
-    <ion-page>
+    <ion-menu side="end" content-id="main-content">
         <ion-header>
             <ion-toolbar>
-                <ion-icon  class="ion-margin-start" :icon="language" size="large" color="primary" slot="start"></ion-icon> <ion-title>Translator</ion-title>
+                <ion-title>Menu Content</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">This is the menu content.</ion-content>
+    </ion-menu>
+
+    <ion-page id="main-content">
+
+
+
+        <ion-header>
+            <ion-toolbar>
+                <ion-icon class="ion-margin-start" :icon="language" size="large" color="primary" slot="start"></ion-icon>
+                <ion-title>Translator</ion-title>
+                <ion-buttons slot="end">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -50,18 +66,26 @@
 </template>
   
 <script>
-import {  IonIcon,IonButtons,IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { IonMenu, IonFab, IonFabButton, IonFabList, IonIcon, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { home, logIn, logOut , language } from 'ionicons/icons'; 
+import {
+    chevronDownCircle,
+    chevronForwardCircle,
+    chevronUpCircle,
+    colorPalette,
+    document,
+    globe,
+    home, logIn, logOut, language
+} from 'ionicons/icons';
 
 
 
 export default {
     name: "TraductorPage",
     components: {
-        IonIcon,  IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
+        IonMenu, IonFab, IonFabButton, IonFabList, IonIcon, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
     },
     data() {
         return {
@@ -72,8 +96,15 @@ export default {
             toLanguages: '',
             textToTranslate: "",
             translationResult: null,
-            language 
- 
+            language,
+            chevronDownCircle,
+            chevronForwardCircle,
+            chevronUpCircle,
+            colorPalette,
+            document,
+            globe,
+
+
         };
     },
     methods: {
