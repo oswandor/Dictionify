@@ -5,6 +5,7 @@ import TabsPage from '../views/TabsPage.vue';
 import TraductorPage from '../views/TraductorPage.vue';
 import DiccionariPage from '../views/DiccionariPage.vue';
 import LoginPage from '../views/LoginPage.vue';
+import { auth } from '@/views/firebase.js'; // Ajusta la ruta según tu estructura de carpetas
 
 
 const routes = [
@@ -40,6 +41,9 @@ const routes = [
         component: DiccionariPage,
       }
     ],
+    meta: {
+      requiresAuth: true, // Agrega esta meta si la ruta requiere autenticación
+    },
   },
 
 ]
@@ -58,5 +62,22 @@ const router = createRouter({
     }
   },
 })
+
+// Agrega un guardia de navegación para verificar la autenticación
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const user = auth.currentUser;
+    if (!user) {
+      // Si el usuario no está autenticado, redirige a la página de inicio de sesión
+      next('/');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+
 
 export default router
