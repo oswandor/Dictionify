@@ -19,26 +19,17 @@
                     <div>
                         <ion-grid>
                             <ion-row>
-                                <ion-col>
 
-                                    <ion-input label="Users" v-model="usersinput" label-placement="floating" fill="solid"
-                                        placeholder="Enter text" class="ion-margin-bottom"></ion-input>
 
-                                  
-                                </ion-col>
+                                <ion-input label="Users" v-model="usersinput" label-placement="floating" fill="solid"
+                                    placeholder="Enter text" class="ion-margin-bottom"></ion-input>
 
-                            </ion-row>
 
-                            <ion-row>
-                                <ion-col>
-                                    <ion-input class="ion-margin-bottom" v-model="passinput" type="password"
-                                        label="Password" label-placement="floating" fill="solid"
-                                        placeholder="Enter text"></ion-input>
 
-                                </ion-col>
-                            </ion-row>
 
-                            <ion-row>
+                                <ion-input class="ion-margin-bottom" v-model="passinput" type="password" label="Password"
+                                    label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+
 
                                 <ion-col>
                                     <ion-button fill="solid" shape="round" class="ion-margin ion-margin-solid"
@@ -59,14 +50,14 @@
     </ion-page>
 </template>
 <script>
-import { alertController, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { IonCol, alertController, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 import { personCircle, home, logIn, logOut, send } from 'ionicons/icons';
 import { auth, signInWithEmailAndPassword } from './firebase.js';
 
 export default {
     name: "LoginPage",
     components: {
-        IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
+        IonCol, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
     },
     data() {
         return {
