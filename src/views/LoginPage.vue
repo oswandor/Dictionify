@@ -21,10 +21,11 @@
                             <ion-row>
                                 <ion-col>
 
-                                    <ion-input label="Users" label-placement="floating" fill="solid"
+                                    <ion-input label="Users" v-model="usersinput" label-placement="floating" fill="solid"
                                         placeholder="Enter text" class="ion-margin-bottom"></ion-input>
-                                    <ion-input class="ion-margin-bottom" type="password" label="Password"
-                                        label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
+                                    <ion-input class="ion-margin-bottom" v-model="passinput" type="password"
+                                        label="Password" label-placement="floating" fill="solid"
+                                        placeholder="Enter text"></ion-input>
 
                                 </ion-col>
 
@@ -48,10 +49,11 @@
                 </ion-card-content>
             </ion-card>
         </ion-content>
+
     </ion-page>
 </template>
 <script>
-import { IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { alertController, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 import { personCircle, home, logIn, logOut, send } from 'ionicons/icons';
 import { auth, signInWithEmailAndPassword } from './firebase.js';
 
@@ -66,16 +68,31 @@ export default {
             logIn,
             home,
             send,
-            personCircle
+            personCircle,
+            usersinput: "",
+            passinput: ""
 
         };
     },
 
-
     methods: {
 
-        Login() {
-            signInWithEmailAndPassword(auth, "ronalgonzalez2023sv@gmail.com", "Gnulinux2023")
+        // metodo de autenticacion 
+        async Login() {
+
+            // Validar el correo electrónico antes de intentar iniciar sesión
+            if (!this.isValidEmail(this.usersinput)) {
+                // Mostrar la alerta si el correo electrónico no es válido
+                await this.showInvalidEmailAlert();
+                return;
+            }
+
+            //  "ronalgonzalez2023sv@gmail.com"   "Gnulinux2023"
+
+            console.log(this.usersinput)
+
+            // logearse  
+            signInWithEmailAndPassword(auth, this.usersinput, this.passinput)
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
@@ -88,7 +105,25 @@ export default {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                 });
-        }
+        },
+
+        // Función para validar el formato del correo electrónico
+        isValidEmail(email) {
+            // Utiliza una expresión regular para validar el formato del correo electrónico
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        },
+
+        // Función para mostrar la alerta de correo no válido
+        async showInvalidEmailAlert() {
+            const alert = await alertController.create({
+                header: 'Correo no válido',
+                message: 'Por favor, ingrese un correo electrónico válido.',
+                buttons: ['OK'],
+            });
+
+            await alert.present();
+        },
 
 
 
