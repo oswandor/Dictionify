@@ -24,12 +24,8 @@
                                 <ion-input label="Users" v-model="usersinput" label-placement="floating" fill="solid"
                                     placeholder="Enter text" class="ion-margin-bottom"></ion-input>
 
-
-
-
                                 <ion-input class="ion-margin-bottom" v-model="passinput" type="password" label="Password"
                                     label-placement="floating" fill="solid" placeholder="Enter text"></ion-input>
-
 
                                 <ion-col>
                                     <ion-button fill="solid" shape="round" class="ion-margin ion-margin-solid"
