@@ -14,22 +14,22 @@
 
       <ion-card-content>
         <form @submit.prevent="signUpUser">
-          <ion-item class="signup-input">
+          <ion-item >
             <ion-label position="floating" >Name</ion-label>
             <ion-input v-model="name" type="text" clear-input required fill="solid"
-              placeholder="Enter text" class="custom-input"></ion-input>
+              placeholder="Enter text" ></ion-input>
           </ion-item>
 
-          <ion-item class="signup-input">
+          <ion-item>
             <ion-label position="floating" >Email</ion-label>
             <ion-input v-model="email" type="email" clear-input required fill="solid"
-              placeholder="Enter text" class="custom-input"></ion-input>
+              placeholder="Enter text" ></ion-input>
           </ion-item>
 
-          <ion-item class="signup-input">
+          <ion-item>
             <ion-label position="floating">Password</ion-label>
             <ion-input v-model="password" type="password" clear-input required fill="solid"
-              placeholder="Enter password" class="custom-input"></ion-input>
+              placeholder="Enter password" ></ion-input>
           </ion-item>
 
           <ion-button type="submit" class="ion-margin ion-margin-no-solid" fill="outline" shape="round" @click="signUpUser">
@@ -169,7 +169,7 @@ export default {
   opacity: 0.8;
 }
 .large-icon {
-    font-size: 4em;
+    font-size: 1.5em;
     color: rgb(98, 62, 168, 1);
 }
 

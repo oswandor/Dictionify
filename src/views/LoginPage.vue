@@ -7,7 +7,7 @@
                     src="https://i.pinimg.com/736x/bb/3d/02/bb3d027efc8586606821a1c60c10a986.jpg" />
                 <ion-card-header class="ion-card-header-centered">
                     <ion-card-title>
-                        <ion-icon :icon="personCircle" size="large"
+                        <ion-icon :icon="personCircle" class="large-icon"
                             style="color: rgb(98, 62, 168,1);"></ion-icon></ion-card-title>
                     <ion-subtitle>
                         <h1> Login </h1>
@@ -216,5 +216,10 @@ export default {
 
     margin-top: 20%;
 
+}
+
+.large-icon {
+    font-size: 1.5em;
+    color: rgb(98, 62, 168, 1);
 }
 </style>
