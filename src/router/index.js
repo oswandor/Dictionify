@@ -4,6 +4,7 @@ import SigupPage from '../views/SigupPage.vue';
 import TabsPage from '../views/TabsPage.vue';
 import TraductorPage from '../views/TraductorPage.vue';
 import DiccionariPage from '../views/DiccionariPage.vue';
+import FavoritosPage from '../views/FavoritosPage.vue';
 import LoginPage from '../views/LoginPage.vue';
 import { auth } from '@/views/firebase.js'; // Ajusta la ruta según tu estructura de carpetas
 
@@ -28,6 +29,7 @@ const routes = [
     name: 'SigupPage',
     component: SigupPage
   },
+ 
   {
     path: "/tabs/",
     component: TabsPage,
@@ -39,6 +41,10 @@ const routes = [
       {
         path: "DiccionariPage",
         component: DiccionariPage,
+      } ,
+      {
+        path: 'FavoritosPage',
+        component: FavoritosPage
       }
     ],
     meta: {

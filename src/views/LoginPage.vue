@@ -49,6 +49,7 @@
 import { IonCol, alertController, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 import { personCircle, home, logIn, logOut, send } from 'ionicons/icons';
 import { auth, signInWithEmailAndPassword } from './firebase.js';
+import { Storage } from '@ionic/storage';
 
 export default {
     name: "LoginPage",
@@ -86,17 +87,26 @@ export default {
 
             // logearse  
             signInWithEmailAndPassword(auth, this.usersinput, this.passinput)
-                .then((userCredential) => {
+                .then( async (userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
+                    
+                    // instanciar el storage
+                    let storage  =   new Storage(); 
 
-                    console.log("User Login:", user);
+                    // create 
+                    await storage.create(); 
+                    // guardar los datos en storage 
+                    await storage.set('uid' , user.uid); 
+                 
+                    console.log("User Login:", user.uid);
                     // ...
-                    this.$router.push('/tabs');
+                    this.$router.push('/tabs/FavoritosPage');
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    console.log(errorMessage)
                 });
         },
 
