@@ -102,6 +102,9 @@ export default {
                     console.log("User Login:", user.uid);
                     // ...
                     this.$router.push('/tabs/FavoritosPage');
+
+
+                    
                 })
                 .catch((error) => {
                     const errorCode = error.code;
