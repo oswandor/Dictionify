@@ -22,7 +22,7 @@
                             <ion-label><strong>Sinónimos:</strong> {{ favorite.favoritos.synonyms.join(', ') }}</ion-label>
                             <ion-label><strong>Antónimos:</strong> {{ favorite.favoritos.antonyms.join(', ') }}</ion-label>
                             <!-- Botón de eliminación -->
-                            <ion-button @click="deleteFavorite(favorite._id.$oid)">
+                            <ion-button @click="deleteFavorite(favorite.favoritos._id.$oid)">
                                 <ion-icon :icon="trash"></ion-icon>
                             </ion-button>
 
@@ -51,7 +51,8 @@ export default {
         return {
             favoritesList: [],
             trashIcon: trash,
-            uid: '' 
+            uid: '' , 
+            trash
         };
     },
 
@@ -63,7 +64,10 @@ export default {
                 const response = await axios.get(`${apiUrl}/allUserFavorites/${uid}`);
                 this.favoritesList = response.data;
 
-                console.log(this.favoritesList);
+                
+                console.log(JSON.stringify(this.favoritesList));
+
+
             } catch (error) {
                 console.error('Error al obtener favoritos del usuario:', error);
             }
@@ -111,10 +115,23 @@ export default {
         this.getAllUserFavorites(this.uid);
 
     },
+   async updated() {
+        
+        // Instanciar el servicio Storage
+        let storage = new Storage();
+
+        // Crear el almacenamiento
+        await storage.create();
+
+        // Obtener datos del almacenamiento
+        this.uid = await storage.get('uid');
+
+        // Hacer algo con los datos recuperados
+        console.log('UID from Storage:', this.uid);
+
+        this.getAllUserFavorites(this.uid);
+    },
 }
-
-
-
 
 </script>
 <style></style>
