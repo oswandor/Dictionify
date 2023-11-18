@@ -30,7 +30,10 @@
                         <h1>Palabra</h1>
                         <br>
                         <h2>{{ results.word }}</h2>
-                     
+
+                        <ion-button type="submit" class="ion-margin ion-margin-no-solid" fill="outline" shape="round" @click="addToFavorites">
+                            <ion-icon :icon="starOutline" class="ion-margin-end"></ion-icon>favorito
+                        </ion-button>
 
                         <br><br>
                         <ion-label class="ion-text-wrap" v-if="results.definition" >
@@ -61,7 +64,8 @@
                             {{  getResultText(results) }}
                         </ion-label>
 
-                    </ion-label>
+                    </ion-label>                        
+                    
                 </ion-item>
                 <ion-item v-else>
                     <ion-label>
@@ -77,7 +81,7 @@
 import {  IonIcon, IonSearchbar, IonList, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 
 import axios from 'axios';
-import {  book, home, logIn, logOut , language } from 'ionicons/icons'; 
+import {  book, home, logIn, logOut , language, starOutline } from 'ionicons/icons'; 
 
 
 export default {
@@ -92,7 +96,10 @@ export default {
             searchTerm: "",
             results: null,
             searchType: "",
-            book
+            book,
+            starOutline,
+            favorites:[]
+
         };
     },
     methods: {
@@ -119,6 +126,10 @@ export default {
             }
             return "";
         },
+        addToFavorites(word) {
+        
+        this.favorites.push(word);
+    }
 
     }
 }
@@ -128,5 +139,13 @@ export default {
   .ion-buttondic {
 
     --background: rebeccapurple;
-  }  
+  }
+  .ion-margin-no-solid {
+  margin-bottom: 20px;
+--border-color: rgb(98, 62, 168, 1);
+--color: rgb(98, 62, 168, 1);
+float: right;
+}
+
+
 </style>
