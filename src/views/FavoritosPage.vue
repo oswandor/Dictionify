@@ -1,8 +1,13 @@
 <template>
     <ion-page>
-        <ion-content>
-            <h1>Lista de Favoritos</h1>
+        <ion-header>
+            <ion-toolbar>
+                <ion-icon class="ion-margin-start" :icon="book" size="large" color="primary" slot="start"></ion-icon>
+                <ion-title>Lista de Favoritos</ion-title>
 
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
             <ion-list>
                 <ion-item v-for="favorite in favoritesList" :key="favorite._id.$oid">
                     <ion-card>
@@ -22,7 +27,7 @@
                             <ion-label><strong>Sinónimos:</strong> {{ favorite.favoritos.synonyms.join(', ') }}</ion-label>
                             <ion-label><strong>Antónimos:</strong> {{ favorite.favoritos.antonyms.join(', ') }}</ion-label>
                             <!-- Botón de eliminación -->
-                            <ion-button @click="deleteFavorite(favorite.favoritos._id.$oid)">
+                            <ion-button @click="deleteFavorite(favorite.favoritos._id.$oid)" color="danger">
                                 <ion-icon :icon="trash"></ion-icon>
                             </ion-button>
 
@@ -51,7 +56,7 @@ export default {
         return {
             favoritesList: [],
             trashIcon: trash,
-            uid: '' , 
+            uid: '',
             trash
         };
     },
@@ -64,7 +69,7 @@ export default {
                 const response = await axios.get(`${apiUrl}/allUserFavorites/${uid}`);
                 this.favoritesList = response.data;
 
-                
+
                 console.log(JSON.stringify(this.favoritesList));
 
 
@@ -78,13 +83,13 @@ export default {
             try {
 
                 console.log(favoriteId)
-               
+
                 const apiUrl = 'https://conteinaerappsdiccionary.calmmoss-65dacf7d.eastus.azurecontainerapps.io';
                 await axios.delete(`${apiUrl}/deleteUserFavoritesByIdDiccionary/${this.uid}/${favoriteId}`);
-                
 
-                const url =  `${apiUrl}/deleteUserFavoritesByIdDiccionary/${this.uid}/${favoriteId}` ; 
-                console.log(url) 
+
+                const url = `${apiUrl}/deleteUserFavoritesByIdDiccionary/${this.uid}/${favoriteId}`;
+                console.log(url)
                 console.log(this.uid)
                 // Vuelve a cargar la lista después de eliminar
                 this.getAllUserFavorites(this.uid);
@@ -115,8 +120,8 @@ export default {
         this.getAllUserFavorites(this.uid);
 
     },
-   async updated() {
-        
+    async updated() {
+
         // Instanciar el servicio Storage
         let storage = new Storage();
 
