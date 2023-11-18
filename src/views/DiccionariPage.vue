@@ -3,7 +3,8 @@
         <ion-header>
             <ion-toolbar>
                 <ion-icon class="ion-margin-start" :icon="book" size="large" color="primary" slot="start"></ion-icon>
-                <ion-title>Dictionary</ion-title>
+                <ion-title>Dictionary</ion-title> 
+              
             </ion-toolbar>
         </ion-header>
         <ion-content>
