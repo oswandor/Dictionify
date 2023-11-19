@@ -3,8 +3,8 @@
         <ion-header>
             <ion-toolbar>
                 <ion-icon class="ion-margin-start" :icon="book" size="large" color="primary" slot="start"></ion-icon>
-                <ion-title>Dictionary</ion-title> 
-              
+                <ion-title>Dictionary</ion-title>
+
             </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -76,15 +76,27 @@
                     </ion-label>
                 </ion-item>
             </ion-list>
+            <!--Botton de cierre de sesion-->
+            <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+                <ion-fab-button>
+                    <ion-icon :icon="chevronUpCircle"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-list side="top">
+                    <ion-fab-button @click="cerrarSesion">
+                        <ion-icon :icon="logOut"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab-list>
+            </ion-fab>
 
         </ion-content>
     </ion-page>
 </template>
 <script>
 import { IonIcon, IonSearchbar, IonList, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { auth, signInWithEmailAndPassword , signOut  } from './firebase.js';
 
 import axios from 'axios';
-import { book, home, logIn, logOut, language, starOutline } from 'ionicons/icons';
+import { book, home, logIn, logOut, language, starOutline   , chevronUpCircle } from 'ionicons/icons';
 import { Storage } from '@ionic/storage';
 
 export default {
@@ -101,7 +113,9 @@ export default {
             searchType: "",
             book,
             starOutline,
-            favorites: []
+            favorites: [] , 
+            logOut, 
+            chevronUpCircle
 
         };
     },
@@ -113,7 +127,9 @@ export default {
             console.log(this.searchTerm)
 
             axios.get(`https://conteinaerappsdiccionary.calmmoss-65dacf7d.eastus.azurecontainerapps.io/${this.searchType}/${this.searchTerm}`).then((response) => {
+
                 this.results = response.data;
+
                 console.log(this.results);
             });
 
@@ -129,7 +145,7 @@ export default {
             }
             return "";
         },
-      async  addToFavorites(word) {
+        async addToFavorites(word) {
 
             console.log(this.results)
 
@@ -156,8 +172,18 @@ export default {
                 });
 
 
-        }
+        },
 
+        cerrarSesion() {
+            // logica de cerra sesion 
+            signOut(auth).then(() => {
+                console.log('Cierre de sesión ejecutado');
+                this.$router.push('/LoginPage');
+            }).catch((error) => {
+                console.log(error)
+            });
+
+        },
     }
 }
 </script>

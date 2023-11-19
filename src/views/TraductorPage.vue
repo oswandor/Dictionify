@@ -1,17 +1,5 @@
 <template>
-    <ion-menu side="end" content-id="main-content">
-        <ion-header>
-            <ion-toolbar>
-                <ion-title>Menu Content</ion-title>
-            </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">This is the menu content.</ion-content>
-    </ion-menu>
-
     <ion-page id="main-content">
-
-
-
         <ion-header>
             <ion-toolbar>
                 <ion-icon class="ion-margin-start" :icon="language" size="large" color="primary" slot="start"></ion-icon>
@@ -61,6 +49,19 @@
 
 
             </div>
+
+            <!--Botton de cierre de sesion-->
+            <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+                <ion-fab-button>
+                    <ion-icon :icon="chevronUpCircle"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-list side="top">
+                    <ion-fab-button @click="cerrarSesion">
+                        <ion-icon :icon="logOut"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab-list>
+            </ion-fab>
+
         </ion-content>
     </ion-page>
 </template>
@@ -79,6 +80,7 @@ import {
     globe,
     home, logIn, logOut, language
 } from 'ionicons/icons';
+import { auth, signInWithEmailAndPassword, signOut } from './firebase.js';
 
 
 
@@ -103,6 +105,7 @@ export default {
             colorPalette,
             document,
             globe,
+            logOut
 
 
         };
@@ -149,6 +152,19 @@ export default {
             console.log(event);
             this.toLanguages = event.detail.value;
         },
+
+
+        cerrarSesion() {
+            // logica de cerra sesion 
+            signOut(auth).then(() => {
+                console.log('Cierre de sesión ejecutado');
+                this.$router.push('/LoginPage');
+            }).catch((error) => {
+                console.log(error)
+            });
+
+        },
+
     },
 };
 </script>

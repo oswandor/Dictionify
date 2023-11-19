@@ -32,10 +32,25 @@
                             </ion-button>
 
 
+
+
                         </ion-card-content>
                     </ion-card>
                 </ion-item>
             </ion-list>
+
+
+
+            <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+                <ion-fab-button>
+                    <ion-icon :icon="chevronUpCircle"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-list side="top">
+                    <ion-fab-button @click="cerrarSesion">
+                        <ion-icon :icon="logOut"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab-list>
+            </ion-fab>
         </ion-content>
     </ion-page>
 </template>
@@ -43,7 +58,8 @@
 import { IonList, IonCol, alertController, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 import { Storage } from '@ionic/storage';
 import axios from 'axios';
-import { trash } from 'ionicons/icons';
+import { chevronUpCircle ,trash , logOut } from 'ionicons/icons';
+import { auth, signInWithEmailAndPassword , signOut  } from './firebase.js';
 
 
 export default {
@@ -57,7 +73,9 @@ export default {
             favoritesList: [],
             trashIcon: trash,
             uid: '',
-            trash
+            trash, 
+            logOut,
+            chevronUpCircle
         };
     },
 
@@ -96,6 +114,17 @@ export default {
             } catch (error) {
                 console.error('Error al eliminar el favorito:', error);
             }
+        },
+
+        cerrarSesion() {
+           // logica de cerra sesion 
+            signOut(auth).then(() => {
+                console.log('Cierre de sesión ejecutado'); 
+                this.$router.push('/LoginPage');
+            }).catch((error) => {
+                console.log(error)
+            });
+
         },
 
 

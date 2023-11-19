@@ -48,7 +48,7 @@
 <script>
 import { IonCol, alertController, IonIcon, IonGrid, IonRow, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
 import { personCircle, home, logIn, logOut, send } from 'ionicons/icons';
-import { auth, signInWithEmailAndPassword } from './firebase.js';
+import { auth, signInWithEmailAndPassword, signOut } from './firebase.js';
 import { Storage } from '@ionic/storage';
 
 export default {
@@ -87,28 +87,36 @@ export default {
 
             // logearse  
             signInWithEmailAndPassword(auth, this.usersinput, this.passinput)
-                .then( async (userCredential) => {
+                .then(async (userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    
+
                     // instanciar el storage
-                    let storage  =   new Storage(); 
+                    let storage = new Storage();
 
                     // create 
-                    await storage.create(); 
+                    await storage.create();
                     // guardar los datos en storage 
-                    await storage.set('uid' , user.uid); 
-                 
+                    await storage.set('uid', user.uid);
+
                     console.log("User Login:", user.uid);
                     // ...
                     this.$router.push('/tabs/FavoritosPage');
 
 
-                    
+
                 })
-                .catch((error) => {
+                .catch(async (error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    
+                    if (errorCode === 'auth/wrong-password') {
+                        // Mostrar alerta de contraseña incorrecta
+                       await this.showInvalidEmailAlert('Contraseña incorrecta', 'Por favor, ingrese una contraseña válida.');
+                    } else {
+                        // Otro tipo de error, puedes mostrar un mensaje genérico
+                        console.log(errorMessage);
+                    }
                     console.log(errorMessage)
                 });
         },
@@ -121,17 +129,15 @@ export default {
         },
 
         // Función para mostrar la alerta de correo no válido
-        async showInvalidEmailAlert() {
+       async  showInvalidEmailAlert() {
             const alert = await alertController.create({
-                header: 'Correo no válido',
-                message: 'Por favor, ingrese un correo electrónico válido.',
+                header: 'Contraseña no válido',
+                message: 'Por favor, ingrese la contraseña válido.',
                 buttons: ['OK'],
             });
 
             await alert.present();
         },
-
-
 
     }
 
