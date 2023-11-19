@@ -92,18 +92,18 @@
     </ion-page>
 </template>
 <script>
-import { IonIcon, IonSearchbar, IonList, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
-import { auth, signInWithEmailAndPassword , signOut  } from './firebase.js';
+import { toastController  , IonIcon, IonSearchbar, IonList, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+import { auth, signInWithEmailAndPassword, signOut } from './firebase.js';
 
 import axios from 'axios';
-import { book, home, logIn, logOut, language, starOutline   , chevronUpCircle } from 'ionicons/icons';
+import { book, home, logIn, logOut, language, starOutline, chevronUpCircle } from 'ionicons/icons';
 import { Storage } from '@ionic/storage';
 
 export default {
     name: "DiccionariPage",
 
     components: {
-        IonIcon, IonSearchbar, IonList, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
+        toastController  , IonIcon, IonSearchbar, IonList, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
     },
 
     data() {
@@ -113,8 +113,8 @@ export default {
             searchType: "",
             book,
             starOutline,
-            favorites: [] , 
-            logOut, 
+            favorites: [],
+            logOut,
             chevronUpCircle
 
         };
@@ -164,8 +164,17 @@ export default {
                 uid: uid,
                 idDiccionary: this.results._id
             })
-                .then(function (response) {
+                .then(async function (response) {
                     console.log(response);
+
+                
+                    const toast = await toastController.create({
+                        message: 'Agregado a favoritos con éxito',
+                        duration: 1500,
+                        position: 'middle',
+                    });
+
+                    await toast.present();
                 })
                 .catch(function (error) {
                     console.log(error);
